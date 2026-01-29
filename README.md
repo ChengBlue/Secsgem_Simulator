@@ -198,3 +198,54 @@ Secsgem_Simulator/
 ## 八、许可证与免责声明
 
 本工具仅供学习、开发与调试使用。在实际产线或关键系统中使用前，请结合自身需求做充分测试与评估。
+
+
+
+### 如何在其他电脑运行
+
+你需要发布一个 自包含（self-contained）单文件 exe，这样目标电脑不需要安装 .NET，也不需要源码，只要拷贝发布目录即可运行。
+
+------
+
+### 一次性发布步骤（在你的开发电脑上做）
+
+在项目根目录（有 SecsGemSimulator.sln 的目录）执行：
+
+```
+dotnet publish SecsGemSimulator\SecsGemSimulator.csproj ^
+  -c Release ^
+  -r win-x64 ^
+  --self-contained true ^
+  /p:PublishSingleFile=true
+```
+
+说明：
+
+- -c Release：发布 Release 版本。
+
+- -r win-x64：目标是 64 位 Windows（如果对方是 32 位系统，用 win-x86）。
+
+- --self-contained true：打包 .NET 运行库，目标机不用装 .NET。
+
+- /p:PublishSingleFile=true：尽量打成一个 exe 文件。
+
+执行成功后，在这个目录里找到发布结果：
+
+SecsGemSimulator\bin\Release\net8.0-windows\win-x64\publish\
+
+里面会有一个较大的 SecsGemSimulator.exe（还有一些依赖文件，这是正常的）。
+
+------
+
+### 拷贝到其他电脑如何用
+
+1. 整个 publish 目录压缩成 zip，拷贝到目标电脑（U 盘 / 网盘都可以）。
+2. 在目标电脑解压到任意目录。
+3. 双击 SecsGemSimulator.exe 即可运行。
+4. 如需固定使用，可以：
+
+- 给 SecsGemSimulator.exe 创建桌面快捷方式；
+
+- 或把整个目录放到你喜欢的位置（例如 D:\Tools\SecsGemSimulator）。
+
+\> 提醒：config.json 在程序运行目录下，拷贝时也一起带过去，目标机可以通过界面上的 Save Config 更新自己的配置。
