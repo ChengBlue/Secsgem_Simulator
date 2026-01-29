@@ -1,0 +1,11 @@
+{
+  "IpAddress": "127.0.0.1",
+  "Port": 5000,
+  "IsActiveMode": true,
+  "DeviceId": 0,
+  "T3Timeout": 45,
+  "T5Timeout": 10,
+  "T6Timeout": 5,
+  "T7Timeout": 10,
+  "LinkTestInterval": 60
+}
